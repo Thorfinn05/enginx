@@ -1,0 +1,97 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
+import { Bug, Terminal } from "lucide-react";
+import { getAllConcepts } from "@/lib/codesPack";
+
+export function BugFinderSection() {
+  const router = useRouter();
+  const concepts = useMemo(() => ["all", ...getAllConcepts()], []);
+  const [concept, setConcept] = useState<string>("all");
+  const [count, setCount] = useState(5);
+
+  function start() {
+    const q = new URLSearchParams({ count: String(count) });
+    if (concept !== "all") q.set("concept", concept);
+    router.push(`/play/bug-finder?${q.toString()}`);
+  }
+
+  return (
+    <section id="bug-finder" className="mb-10 scroll-mt-8">
+      <div className="mb-4 flex items-center gap-2">
+        <Bug className="text-amber-400" size={18} />
+        <span className="font-anton text-[11px] uppercase tracking-widest text-cream/50">
+          CS fundamentals · Bug finder
+        </span>
+      </div>
+
+      <div className="relative overflow-hidden rounded-[24px] border border-amber-400/20 bg-gradient-to-br from-amber-400/[0.07] via-white/[0.03] to-transparent p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] md:p-8">
+        <div
+          className="pointer-events-none absolute -left-10 bottom-0 h-40 w-40 rounded-full bg-amber-500/10 blur-3xl"
+          aria-hidden
+        />
+
+        <div className="relative grid gap-8 lg:grid-cols-[1fr_minmax(0,360px)] lg:items-center">
+          <div>
+            <div className="flex items-center gap-2">
+              <Terminal className="text-amber-300" size={24} />
+              <h2 className="font-anton text-2xl uppercase tracking-wide text-cream sm:text-3xl">
+                Bug finder
+              </h2>
+            </div>
+            <p className="mt-3 max-w-xl font-mono text-sm leading-relaxed text-cream/70">
+              Random challenges from{" "}
+              <code className="rounded bg-white/10 px-1 text-[12px] text-amber-200/90">
+                data/codes.json
+              </code>
+              . Read the snippet in the terminal, pick the token that fills the blank,
+              then review explanations when you finish the run.
+            </p>
+            <ul className="mt-4 space-y-1.5 font-mono text-xs text-cream/55">
+              <li>· Filter by concept or play across all topics</li>
+              <li>· Points sync like the quiz arena</li>
+            </ul>
+          </div>
+
+          <div className="liquid-glass rounded-[20px] border border-white/10 p-5">
+            <label className="font-mono text-[10px] uppercase tracking-wider text-cream/50">
+              Concept
+            </label>
+            <select
+              value={concept}
+              onChange={(e) => setConcept(e.target.value)}
+              className="mt-2 w-full rounded-[12px] border border-white/15 bg-[#010828]/70 px-4 py-3 font-mono text-sm text-cream focus:border-amber-400/50 focus:outline-none"
+            >
+              {concepts.map((c) => (
+                <option key={c} value={c}>
+                  {c === "all" ? "All concepts" : c}
+                </option>
+              ))}
+            </select>
+
+            <label className="mt-4 block font-mono text-[10px] uppercase tracking-wider text-cream/50">
+              Challenges
+            </label>
+            <input
+              type="number"
+              min={1}
+              max={20}
+              value={count}
+              onChange={(e) => setCount(Number(e.target.value))}
+              className="mt-2 w-full rounded-[12px] border border-white/15 bg-[#010828]/70 px-4 py-3 font-mono text-sm text-cream tabular-nums focus:border-amber-400/50 focus:outline-none"
+            />
+
+            <button
+              type="button"
+              onClick={() => start()}
+              className="mt-5 w-full rounded-[14px] bg-gradient-to-r from-amber-500 to-orange-500 py-3.5 font-anton uppercase tracking-wide text-[#010828] shadow-[0_0_24px_rgba(245,158,11,0.25)] transition hover:brightness-110"
+            >
+              Open terminal
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

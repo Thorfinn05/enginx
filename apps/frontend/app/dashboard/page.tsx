@@ -8,6 +8,7 @@ import { useAuthState } from "@/lib/auth";
 import { useAuthenticatedGameSocket } from "@/lib/socket";
 import { useSession } from "@/lib/session";
 import { QuizArenaSection } from "@/components/dashboard/QuizArenaSection";
+import { BugFinderSection } from "@/components/dashboard/BugFinderSection";
 import {
   Calculator, Code2, BarChart2, Grid3x3,
   Bot, Eye, Shield, TrendingUp,
@@ -31,7 +32,7 @@ const NAV_ITEMS: {
   { icon: Plus, label: "MORE", active: false },
 ];
 
-const CATEGORIES = ['MATH', 'AI/ML', 'ELECTRONICS', 'BONUS'] as const;
+const CATEGORIES = ['MATH', 'AI/ML', 'CS FUNDAMENTALS', 'ELECTRONICS', 'BONUS'] as const;
 
 type Category = typeof CATEGORIES[number];
 
@@ -40,6 +41,7 @@ interface GameCard {
   desc: string;
   icon: React.ElementType;
   mode: 'SOLO' | 'MULTIPLAYER';
+  scrollTo?: "bug-finder";
 }
 
 const GAMES: Record<Category, { cursive: string; cards: GameCard[] }> = {
@@ -59,6 +61,21 @@ const GAMES: Record<Category, { cursive: string; cards: GameCard[] }> = {
       { title: 'IMAGE GUESS AI', desc: 'Guess what the AI is recognizing from blurry, partial images.', icon: Eye, mode: 'SOLO' },
       { title: 'BIAS DETECTOR', desc: 'Identify biased vs unbiased datasets in real scenarios.', icon: Shield, mode: 'SOLO' },
       { title: 'PREDICTION GAME', desc: 'Guess outcomes based on data trends shown in charts.', icon: TrendingUp, mode: 'SOLO' },
+    ],
+  },
+  'CS FUNDAMENTALS': {
+    cursive: 'Code & logic',
+    cards: [
+      {
+        title: 'BUG FINDER',
+        desc: 'C snippets from codes.json — pick the missing token in the terminal.',
+        icon: Bug,
+        mode: 'SOLO',
+        scrollTo: 'bug-finder',
+      },
+      { title: 'STRUCT PAD', desc: 'Coming soon — structs and memory layout quick checks.', icon: Layers, mode: 'SOLO' },
+      { title: 'BIG-O SPRINT', desc: 'Coming soon — complexity drills against the clock.', icon: BarChart2, mode: 'SOLO' },
+      { title: 'BIT TWIDDLER', desc: 'Coming soon — masks, shifts, and bitwise puzzles.', icon: Cpu, mode: 'SOLO' },
     ],
   },
   ELECTRONICS: {
@@ -83,6 +100,7 @@ const GAMES: Record<Category, { cursive: string; cards: GameCard[] }> = {
 const ICON_STYLES: Record<Category, { bg: string; text: string }> = {
   MATH: { bg: 'bg-gradient-to-br from-[#6FFF00]/20 to-[#6FFF00]/5', text: 'text-[#6FFF00]' },
   'AI/ML': { bg: 'bg-gradient-to-br from-[#b724ff]/20 to-[#7c3aed]/5', text: 'text-purple-400' },
+  'CS FUNDAMENTALS': { bg: 'bg-gradient-to-br from-amber-400/25 to-orange-600/10', text: 'text-amber-300' },
   ELECTRONICS: { bg: 'bg-gradient-to-br from-yellow-400/20 to-orange-500/5', text: 'text-yellow-400' },
   BONUS: { bg: 'bg-gradient-to-br from-blue-400/20 to-cyan-500/5', text: 'text-blue-400' },
 };
@@ -267,13 +285,24 @@ const Home = () => {
                 <span className="font-anton text-[28px] text-neon">QUIZ</span>
                 <ChevronRight className="text-cream/50" size={24} />
               </button>
-              <div className="liquid-glass rounded-[20px] px-6 py-5 flex-1 flex items-center justify-between hover:bg-white/10 transition cursor-pointer">
-                <span className="font-anton text-[28px] text-cream">MATH</span>
+              <button
+                type="button"
+                onClick={() =>
+                  document.getElementById("bug-finder")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+                className="liquid-glass rounded-[20px] px-6 py-5 flex-1 flex items-center justify-between hover:bg-white/10 transition cursor-pointer text-left"
+              >
+                <span className="font-anton text-[28px] text-amber-300">BUG</span>
                 <ChevronRight className="text-cream/50" size={24} />
-              </div>
+              </button>
             </div>
 
             <QuizArenaSection />
+
+            <BugFinderSection />
 
             {/* GAME CATEGORIES */}
             <span className="font-anton text-[11px] text-cream/50 uppercase tracking-widest">Game Categories</span>
@@ -315,7 +344,31 @@ const Home = () => {
                       return (
                         <div
                           key={game.title}
-                          className="liquid-glass rounded-[24px] p-5 flex flex-col gap-3 hover:bg-white/10 hover:scale-[1.02] transition-all cursor-pointer group"
+                          role={game.scrollTo ? "button" : undefined}
+                          tabIndex={game.scrollTo ? 0 : undefined}
+                          onClick={() => {
+                            if (game.scrollTo === "bug-finder") {
+                              document.getElementById("bug-finder")?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                              });
+                            }
+                          }}
+                          onKeyDown={(e) => {
+                            if (
+                              game.scrollTo === "bug-finder" &&
+                              (e.key === "Enter" || e.key === " ")
+                            ) {
+                              e.preventDefault();
+                              document.getElementById("bug-finder")?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                              });
+                            }
+                          }}
+                          className={`liquid-glass rounded-[24px] p-5 flex flex-col gap-3 hover:bg-white/10 hover:scale-[1.02] transition-all group ${
+                            game.scrollTo ? "cursor-pointer" : ""
+                          }`}
                         >
                           <div className={`rounded-[14px] w-12 h-12 flex items-center justify-center ${styles.bg}`}>
                             <GameIcon size={22} className={styles.text} />
@@ -366,7 +419,7 @@ const Home = () => {
                 </div>
               ))}
               <p className="mt-1 text-center font-mono text-[10px] text-cream/45">
-                Updates when you finish a run below
+                Updates when you finish quiz or bug finder below
               </p>
             </div>
           ) : null}
