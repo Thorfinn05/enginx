@@ -41,6 +41,29 @@ export function jsonToPublicQuestion(q: QuestionJson): PublicQuestion {
   };
 }
 
+/**
+ * For Socket.IO / server grading: send the selected option text (not "0"/"1")
+ * so it matches pack `answer` strings on the server.
+ */
+export function rawSelectionToAnswerText(
+  q: { type: string; options?: string[] },
+  raw: string
+): string {
+  const s = raw.trim();
+  if (
+    (q.type === "mcq" || q.type === "math") &&
+    q.options &&
+    q.options.length > 0 &&
+    /^\d+$/.test(s)
+  ) {
+    const i = parseInt(s, 10);
+    if (q.options[i] !== undefined) {
+      return q.options[i]!.trim();
+    }
+  }
+  return s;
+}
+
 /** Mirrors `convex/quizGame.ts` `checkAnswer` for JSON questions. */
 export function checkAnswerJson(q: QuestionJson, raw: string): boolean {
   const s = raw.trim();

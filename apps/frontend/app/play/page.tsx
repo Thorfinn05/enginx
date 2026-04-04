@@ -56,11 +56,39 @@ export default function PlayLobbyPage() {
           Quiz Arena
         </h1>
         <p className="mt-2 font-mono text-sm leading-relaxed text-cream/70">
-          Questions come only from the category you pick (JSON pack). If that
-          category has fewer items than you request, the run is shorter. Correct
-          answers and explanations appear after you finish all questions. Points
-          save to your profile after each answer.
+          Solo runs use your JSON pack by category. Live 1v1 uses the same pools
+          on the game server—queue for a quick match with another signed-in
+          player.
         </p>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="liquid-glass rounded-[20px] border border-white/10 p-5">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-cream/50">
+              Mode
+            </p>
+            <h2 className="font-grotesk mt-2 text-lg text-cream">Solo practice</h2>
+            <p className="mt-2 font-mono text-xs leading-relaxed text-cream/60">
+              Category, count, optional fixed timer. Points save to your profile.
+            </p>
+          </div>
+          <Link
+            href="/play/multi"
+            className="liquid-glass group block rounded-[20px] border border-neon/25 bg-neon/[0.06] p-5 transition hover:border-neon/50"
+          >
+            <p className="font-mono text-[10px] uppercase tracking-widest text-neon/80">
+              Mode
+            </p>
+            <h2 className="font-grotesk mt-2 text-lg text-cream group-hover:text-neon">
+              1v1 multiplayer
+            </h2>
+            <p className="mt-2 font-mono text-xs leading-relaxed text-cream/60">
+              Real-time matchmaking · server-timed rounds · live leaderboard
+            </p>
+            <span className="mt-3 inline-block font-mono text-xs text-neon">
+              Open arena →
+            </span>
+          </Link>
+        </div>
 
         <div className="liquid-glass mt-8 space-y-6 rounded-[24px] border border-white/10 p-6">
           <div>

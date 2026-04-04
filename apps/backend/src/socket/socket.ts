@@ -2,6 +2,11 @@ import { Server } from "socket.io";
 import type { CustomSocket } from "../types/types.js";
 import { socketAuthMiddleware } from "../middleware/auth.js";
 import { gameManager } from "../game/gameManager.js";
+import {
+  checkAnswerJson,
+  correctAnswerDisplay,
+  packQuestionToPayload,
+} from "../game/quizEvaluator.js";
 
 const ANSWER_DISPLAY_TIMEOUT = 3000; // 3 seconds to show answer
 const NEXT_QUESTION_DELAY = 1000; // 1 second before next question
@@ -108,14 +113,7 @@ export const initializeSocket = (io: Server) => {
           roomId: data.roomId,
           gameState: room.gameState,
           questionIndex: room.currentQuestionIndex,
-          question: question
-            ? {
-                id: question.id,
-                text: question.text,
-                options: question.options,
-                timeLimit: question.timeLimit,
-              }
-            : null,
+          question: question ? packQuestionToPayload(question) : null,
           leaderboard,
           players: Array.from(room.players.values()).map((p) => ({
             socketId: p.socketId,
@@ -171,16 +169,12 @@ function sendQuestion(io: Server, roomId: string) {
     player.currentAnswer = null;
   });
 
-  // Send question to all players in room
+  const totalRounds = gameManager.getRoundCount(roomId);
+
   io.to(roomId).emit("question", {
     questionIndex: room.currentQuestionIndex,
-    totalQuestions: 10,
-    question: {
-      id: question.id,
-      text: question.text,
-      options: question.options,
-      timeLimit: question.timeLimit,
-    },
+    totalQuestions: totalRounds,
+    question: packQuestionToPayload(question),
   });
 
   // Set timer for answer submission
@@ -188,9 +182,8 @@ function sendQuestion(io: Server, roomId: string) {
   roomState.questionTimer = setTimeout(() => {
     room.gameState = "answer";
 
-    // Emit answer results
     const scores = gameManager.calculateRoundScores(roomId);
-    const correctAnswer = question.correctAnswer;
+    const correctAnswer = correctAnswerDisplay(question);
 
     io.to(roomId).emit("answer-time-up", {
       correctAnswer,
@@ -199,7 +192,10 @@ function sendQuestion(io: Server, roomId: string) {
           socketId,
           {
             answer: player.currentAnswer,
-            isCorrect: player.currentAnswer === correctAnswer,
+            isCorrect: checkAnswerJson(
+              question,
+              player.currentAnswer ?? ""
+            ),
             points: scores.get(socketId) || 0,
           },
         ])
