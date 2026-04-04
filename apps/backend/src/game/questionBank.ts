@@ -83,8 +83,16 @@ export const questionBank: Question[] = [
   },
 ];
 
+export const questionById = new Map<string, Question>(
+  questionBank.map((q) => [q.id, q])
+);
+
 export const getQuestion = (index: number): Question | undefined => {
   return questionBank[index];
+};
+
+export const getQuestionById = (id: string): Question | undefined => {
+  return questionById.get(id);
 };
 
 export const getTotalQuestions = (): number => {

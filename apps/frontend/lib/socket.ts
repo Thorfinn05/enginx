@@ -89,3 +89,6 @@ export function useAuthenticatedGameSocket(): AuthenticatedSocketState & {
 
   return { socket, connected, error, sessionToken };
 }
+
+export { useMultiplayerQuiz } from "./useMultiplayerQuiz";
+export type { UseMultiplayerQuiz } from "./useMultiplayerQuiz";

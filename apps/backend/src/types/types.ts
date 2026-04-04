@@ -1,4 +1,5 @@
 import { Socket } from "socket.io";
+import type { QuestionJson } from "../game/packQuestion.js";
 
 export interface ConvexUser {
   id: string;
@@ -33,6 +34,8 @@ export interface Question {
 export interface GameRoom {
   id: string;
   players: Map<string, Player>;
+  /** One match = shuffled subset from `packages/*.json` (same order for both players). */
+  roundQuestions: QuestionJson[];
   currentQuestionIndex: number;
   gameState: "waiting" | "playing" | "question" | "answer" | "ended";
   startTime: number;

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ClipboardList, Sparkles, Timer } from "lucide-react";
@@ -121,6 +122,12 @@ export function QuizArenaSection() {
             >
               Start run
             </button>
+            <Link
+              href="/play/multi"
+              className="mt-3 block text-center font-mono text-xs text-neon/90 underline-offset-4 hover:underline"
+            >
+              Or play 1v1 multiplayer →
+            </Link>
           </div>
         </div>
       </div>
