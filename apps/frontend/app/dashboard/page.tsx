@@ -133,9 +133,9 @@ const Home = () => {
   return (
     <div className="relative flex h-[100dvh] min-h-0 flex-col bg-[#010828]">
       {/* Background video */}
-      {/* <video autoPlay loop muted playsInline className="fixed inset-0 w-full h-full object-cover z-0 opacity-15">
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_053923_22c0a6a5-313c-474c-85ff-3b50d25e944a.mp4" type="video/mp4" />
-      </video> */}
+      <video autoPlay loop muted playsInline className="fixed inset-0 w-full h-full object-cover z-0 opacity-15">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_151551_992053d1-3d3e-4b8c-abac-45f22158f411.mp4" type="video/mp4" />
+      </video>
 
       {/* Texture overlay */}
       <div
