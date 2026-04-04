@@ -1,10 +1,8 @@
-import { Server, Socket } from "socket.io";
+import { Server } from "socket.io";
 import type { CustomSocket } from "../types/types.js";
 import { authMiddleware } from "../middleware/auth.js";
 import { gameManager } from "../game/gameManager.js";
-import { getCurrentQuestion } from "../game/questionBank.js";
 
-const QUESTION_TIMEOUT = 15000; // 15 seconds per question
 const ANSWER_DISPLAY_TIMEOUT = 3000; // 3 seconds to show answer
 const NEXT_QUESTION_DELAY = 1000; // 1 second before next question
 
@@ -40,7 +38,12 @@ export const initializeSocket = (io: Server) => {
           if (room) {
             gameManager.updatePlayerName(roomId, socket.id, username);
 
-            socket.join(roomId);
+            // Ensure every matched player socket is in the same room.
+            room.players.forEach((_, playerSocketId) => {
+              const playerSocket = io.sockets.sockets.get(playerSocketId);
+              playerSocket?.join(roomId);
+            });
+
             console.log(`[GAME_START] Room ${roomId} started with 2 players`);
 
             // Notify both players that game started
@@ -232,94 +235,4 @@ function sendQuestion(io: Server, roomId: string) {
       }
     }, ANSWER_DISPLAY_TIMEOUT);
   }, question.timeLimit * 1000);
-}
-
-/**
- * Helper to get current question (fix for import)
- */
-function getCurrentQuestion(questionIndex: number) {
-  const questions = [
-    {
-      id: "q1",
-      text: "What is the capital of France?",
-      options: ["London", "Paris", "Berlin", "Madrid"],
-      correctAnswer: "Paris",
-      timeLimit: 10,
-    },
-    {
-      id: "q2",
-      text: "Which planet is known as the Red Planet?",
-      options: ["Venus", "Mars", "Jupiter", "Saturn"],
-      correctAnswer: "Mars",
-      timeLimit: 10,
-    },
-    {
-      id: "q3",
-      text: "What is 2 + 2?",
-      options: ["3", "4", "5", "6"],
-      correctAnswer: "4",
-      timeLimit: 8,
-    },
-    {
-      id: "q4",
-      text: "Who wrote Romeo and Juliet?",
-      options: [
-        "Jane Austen",
-        "William Shakespeare",
-        "Charles Dickens",
-        "Mark Twain",
-      ],
-      correctAnswer: "William Shakespeare",
-      timeLimit: 12,
-    },
-    {
-      id: "q5",
-      text: "What is the largest ocean on Earth?",
-      options: [
-        "Atlantic Ocean",
-        "Indian Ocean",
-        "Arctic Ocean",
-        "Pacific Ocean",
-      ],
-      correctAnswer: "Pacific Ocean",
-      timeLimit: 10,
-    },
-    {
-      id: "q6",
-      text: "In what year did the Titanic sink?",
-      options: ["1912", "1905", "1920", "1898"],
-      correctAnswer: "1912",
-      timeLimit: 10,
-    },
-    {
-      id: "q7",
-      text: "What is the chemical symbol for Gold?",
-      options: ["Go", "Gd", "Au", "Ag"],
-      correctAnswer: "Au",
-      timeLimit: 10,
-    },
-    {
-      id: "q8",
-      text: "Which technology did Tim Berners-Lee invent?",
-      options: ["The Internet", "The World Wide Web", "JavaScript", "TCP"],
-      correctAnswer: "The World Wide Web",
-      timeLimit: 12,
-    },
-    {
-      id: "q9",
-      text: "What is the smallest prime number?",
-      options: ["0", "1", "2", "3"],
-      correctAnswer: "2",
-      timeLimit: 8,
-    },
-    {
-      id: "q10",
-      text: "Which country is home to Kangaroos?",
-      options: ["New Zealand", "Australia", "South Africa", "Brazil"],
-      correctAnswer: "Australia",
-      timeLimit: 10,
-    },
-  ];
-
-  return questions[questionIndex];
 }

@@ -2,6 +2,8 @@
  * Quick Reference Guide - Quiz Backend API
  */
 
+declare const io: any;
+
 // ============================================
 // Socket.IO Client Example
 // ============================================
@@ -19,7 +21,7 @@ const socket = io("http://localhost:4000", {
 // Description: Player joins the game queue
 // Emits back: "waiting-for-opponent" or "game-started"
 
-socket.emit("join-game", { username: "My Player" }, (response) => {
+socket.emit("join-game", { username: "My Player" }, (response: any) => {
   // response = {
   //   status: "waiting" | "game_started" | "error",
   //   roomId?: string,
@@ -43,7 +45,7 @@ socket.on("waiting-for-opponent", () => {
 // Sent by: Server
 // Description: 2 players matched, game begins
 
-socket.on("game-started", (data) => {
+socket.on("game-started", (data: any) => {
   // data = {
   //   roomId: string,
   //   players: [
@@ -59,7 +61,7 @@ socket.on("game-started", (data) => {
 // Sent by: Server
 // Description: New question for the player
 
-socket.on("question", (data) => {
+socket.on("question", (data: any) => {
   // data = {
   //   questionIndex: number,           // 0-9
   //   totalQuestions: number,          // 10
@@ -92,7 +94,7 @@ socket.emit("submit-answer", {
 // Sent by: Server
 // Description: Time expired, show results
 
-socket.on("answer-time-up", (data) => {
+socket.on("answer-time-up", (data: any) => {
   // data = {
   //   correctAnswer: string,
   //   scores: {
@@ -113,7 +115,7 @@ socket.on("answer-time-up", (data) => {
 // Sent by: Server
 // Description: Updated scores after each question
 
-socket.on("leaderboard-update", (data) => {
+socket.on("leaderboard-update", (data: any) => {
   // data = {
   //   leaderboard: [
   //     { userId, username, score },
@@ -129,7 +131,7 @@ socket.on("leaderboard-update", (data) => {
 // Sent by: Server
 // Description: Quiz finished after 10 questions
 
-socket.on("game-ended", (data) => {
+socket.on("game-ended", (data: any) => {
   // data = {
   //   finalLeaderboard: [
   //     { userId, username, score },
@@ -146,7 +148,7 @@ socket.on("game-ended", (data) => {
 // Sent by: Server
 // Description: Opponent left the game
 
-socket.on("player-disconnected", (data) => {
+socket.on("player-disconnected", (data: any) => {
   // data = { message: "Opponent disconnected" }
   // End game, show message
 });
@@ -157,7 +159,7 @@ socket.on("player-disconnected", (data) => {
 // Sent by: Client
 // Description: Query current game state
 
-socket.emit("get-state", { roomId: "room-123" }, (state) => {
+socket.emit("get-state", { roomId: "room-123" }, (state: any) => {
   // state = {
   //   roomId: string,
   //   gameState: "waiting" | "playing" | "question" | "answer" | "ended",
@@ -251,7 +253,7 @@ In production:
 // Error Handling
 // ============================================
 
-socket.on("error", (error) => {
+socket.on("error", (error: any) => {
   // Emitted when:
   // - No auth token provided
   // - Server encounters exception
@@ -362,24 +364,24 @@ export const API_REFERENCE = {
   socketEvents: {
     // Client → Server
     "join-game": {
-      payload: { username?: string },
-      callback: (response: any) => void,
+      payload: { username: "string (optional)" },
+      callback: "(response) => void",
     },
-    "submit-answer": { roomId: string, answer: string },
-    "get-state": { roomId: string },
+    "submit-answer": { roomId: "string", answer: "string" },
+    "get-state": { roomId: "string" },
 
     // Server → Client
     "waiting-for-opponent": {},
-    "game-started": { roomId: string; players: any[] },
+    "game-started": { roomId: "string", players: "array" },
     question: {
-      questionIndex: number;
-      totalQuestions: number;
-      question: any;
+      questionIndex: "number",
+      totalQuestions: "number",
+      question: "object",
     },
-    "answer-time-up": { correctAnswer: string; scores: any },
-    "leaderboard-update": { leaderboard: any[] },
-    "game-ended": { finalLeaderboard: any[]; message: string },
-    "player-disconnected": { message: string },
-    "answer-received": { message: string },
+    "answer-time-up": { correctAnswer: "string", scores: "object" },
+    "leaderboard-update": { leaderboard: "array" },
+    "game-ended": { finalLeaderboard: "array", message: "string" },
+    "player-disconnected": { message: "string" },
+    "answer-received": { message: "string" },
   },
 };
