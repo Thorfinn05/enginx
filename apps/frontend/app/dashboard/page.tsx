@@ -164,7 +164,7 @@ const Home = () => {
       {/* TOP BAR */}
       <header className="liquid-glass border-b border-white/10 px-6 py-3 flex items-center justify-between sticky top-0 z-40">
         <div className="flex items-center gap-6">
-          <Link href="/" className="font-anton text-[16px] uppercase text-cream tracking-wider">EngineX</Link>
+          <Link href="/" className="font-grotesk text-[16px] uppercase text-cream tracking-wider">EngineX</Link>
         </div>
 
         {/* Current player */}
@@ -178,7 +178,7 @@ const Home = () => {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <span className="font-anton text-[10px] text-cream">
+              <span className="font-grotesk text-[10px] text-cream">
                 {displayName.slice(0, 2).toUpperCase()}
               </span>
             )}
@@ -252,12 +252,12 @@ const Home = () => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <span className="font-anton text-[10px] text-cream">
+                <span className="font-grotesk text-[10px] text-cream">
                   {displayName.slice(0, 1).toUpperCase()}
                 </span>
               )}
             </div>
-            <span className="font-anton text-[13px] text-cream uppercase truncate max-w-[140px]">
+            <span className="font-grotesk text-[13px] text-cream uppercase truncate max-w-[140px]">
               {displayName}
             </span>
           </div>
@@ -268,7 +268,7 @@ const Home = () => {
           <div className="max-w-[1400px]">
             {/* DAILY CHALLENGE */}
             <div className="flex items-center justify-between mb-4">
-              <span className="font-anton text-[11px] text-cream/50 uppercase tracking-widest">Daily Challenge</span>
+              <span className="font-grotesk text-[11px] text-cream/50 uppercase tracking-widest">Daily Challenge</span>
               <span className="font-mono text-neon text-sm">⏱ 07:49</span>
             </div>
             <div className="flex gap-4 mb-8">
@@ -282,7 +282,7 @@ const Home = () => {
                 }
                 className="liquid-glass rounded-[20px] px-6 py-5 flex-1 flex items-center justify-between hover:bg-white/10 transition cursor-pointer text-left"
               >
-                <span className="font-anton text-[28px] text-neon">QUIZ</span>
+                <span className="font-grotesk text-[28px] text-neon">QUIZ</span>
                 <ChevronRight className="text-cream/50" size={24} />
               </button>
               <button
@@ -295,7 +295,7 @@ const Home = () => {
                 }
                 className="liquid-glass rounded-[20px] px-6 py-5 flex-1 flex items-center justify-between hover:bg-white/10 transition cursor-pointer text-left"
               >
-                <span className="font-anton text-[28px] text-amber-300">BUG</span>
+                <span className="font-grotesk text-[28px] text-amber-300">BUG</span>
                 <ChevronRight className="text-cream/50" size={24} />
               </button>
             </div>
@@ -305,7 +305,7 @@ const Home = () => {
             <BugFinderSection />
 
             {/* GAME CATEGORIES */}
-            <span className="font-anton text-[11px] text-cream/50 uppercase tracking-widest">Game Categories</span>
+            <span className="font-grotesk text-[11px] text-cream/50 uppercase tracking-widest">Game Categories</span>
 
             {/* Tabs */}
             <div className="flex gap-3 my-4 overflow-x-auto">
@@ -313,7 +313,7 @@ const Home = () => {
                 <button
                   key={cat}
                   onClick={() => setActiveTab(cat)}
-                  className={`font-anton uppercase rounded-full px-5 py-2 text-sm whitespace-nowrap transition ${
+                  className={`font-grotesk uppercase rounded-full px-5 py-2 text-sm whitespace-nowrap transition ${
                     activeTab === cat
                       ? 'bg-neon text-[#010828]'
                       : 'liquid-glass text-cream/60 hover:bg-white/10'
@@ -332,7 +332,7 @@ const Home = () => {
                 <div key={cat} className="mb-10">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-baseline gap-3">
-                      <span className="font-anton text-[20px] text-cream uppercase">{cat}</span>
+                      <span className="font-grotesk text-[20px] text-cream uppercase">{cat}</span>
                       <span className="font-condiment text-neon text-[18px]">{cursive}</span>
                     </div>
                     <span className="font-mono text-neon/70 text-xs hover:text-neon cursor-pointer">SEE ALL →</span>
@@ -373,7 +373,7 @@ const Home = () => {
                           <div className={`rounded-[14px] w-12 h-12 flex items-center justify-center ${styles.bg}`}>
                             <GameIcon size={22} className={styles.text} />
                           </div>
-                          <span className="font-anton text-[15px] text-cream uppercase mt-1">{game.title}</span>
+                          <span className="font-grotesk text-[15px] text-cream uppercase mt-1">{game.title}</span>
                           <span className="font-mono text-cream/50 text-xs leading-relaxed line-clamp-2">{game.desc}</span>
                           <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
                             <span className={`rounded-full px-2 py-0.5 text-[10px] font-mono ${
@@ -402,7 +402,7 @@ const Home = () => {
           {leaderboard && leaderboard.length > 0 ? (
             <div className="liquid-glass flex flex-col gap-2 rounded-[20px] p-5">
               <div className="flex items-center justify-between">
-                <span className="font-anton text-[13px] uppercase text-cream">
+                <span className="font-grotesk text-[13px] uppercase text-cream">
                   Leaderboard
                 </span>
                 <Trophy size={16} className="text-neon" />
@@ -427,7 +427,7 @@ const Home = () => {
           {/* DAILY QUESTS */}
           <div className="liquid-glass rounded-[20px] p-5 flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <span className="font-anton text-[13px] text-cream uppercase">Daily Quest</span>
+              <span className="font-grotesk text-[13px] text-cream uppercase">Daily Quest</span>
               <div className="flex items-center gap-2">
                 <span className="font-mono text-neon text-xs">⏱ 07:49</span>
                 <span className="font-mono text-cream/40 text-xs cursor-pointer">VIEW ALL</span>
@@ -444,7 +444,7 @@ const Home = () => {
                   {q.progress >= q.total ? (
                     <CheckCircle size={18} className="text-neon" />
                   ) : (
-                    <button className="rounded-[10px] px-3 py-1.5 bg-neon text-[#010828] font-anton uppercase text-xs hover:brightness-110">
+                    <button className="rounded-[10px] px-3 py-1.5 bg-neon text-[#010828] font-grotesk uppercase text-xs hover:brightness-110">
                       Play Now
                     </button>
                   )}
@@ -455,7 +455,7 @@ const Home = () => {
 
           {/* DOWNLOAD APP */}
           <div className="liquid-glass rounded-[20px] p-5 flex flex-col gap-3">
-            <span className="font-anton text-[16px] text-cream uppercase">Download Mobile App</span>
+            <span className="font-grotesk text-[16px] text-cream uppercase">Download Mobile App</span>
             <span className="font-mono text-cream/50 text-xs">Scan the QR code using your phone</span>
             <div className="w-24 h-24 bg-white/5 liquid-glass rounded-[12px] flex items-center justify-center">
               <QrCode size={40} className="text-cream/30" />
