@@ -1,8 +1,12 @@
-import "dotenv/config";
+import { config } from "dotenv";
+
+// Load `.env.local` first (common in this repo), then `.env`
+config({ path: ".env.local" });
+config({ path: ".env" });
 
 import { createServer_ } from "./server.ts";
 
-const PORT = parseInt( "8000", 10);
+const PORT = parseInt(process.env.PORT ?? "8000", 10);
 const HOST = process.env.HOST || "0.0.0.0";
 
 const { app, server, io } = createServer_();
