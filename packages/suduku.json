@@ -1,0 +1,439 @@
+{
+  "puzzles": [
+    {
+      "id": "elec_comp_001",
+      "mode": "components",
+      "department": "electronics",
+      "difficulty": 1,
+      "displayTime": 3,
+      "recallTime": 10,
+      "grid": [
+        ["Resistor", "", "", ""],
+        ["", "Capacitor", "", ""],
+        ["", "", "LED", ""],
+        ["", "", "", "IC"]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 0, "value": "Resistor" },
+        { "row": 1, "col": 1, "value": "Capacitor" },
+        { "row": 2, "col": 2, "value": "LED" },
+        { "row": 3, "col": 3, "value": "IC" }
+      ],
+      "scoring": { "correctClick": 10, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Four components placed diagonally",
+      "explanation": "Resistor limits current, Capacitor stores energy, LED emits light, IC is integrated circuit"
+    },
+    {
+      "id": "elec_comp_002",
+      "mode": "components",
+      "department": "electronics",
+      "difficulty": 1,
+      "displayTime": 3,
+      "recallTime": 10,
+      "grid": [
+        ["", "Diode", "", ""],
+        ["", "", "Transistor", ""],
+        ["Inductor", "", "", ""],
+        ["", "", "", "Switch"]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 1, "value": "Diode" },
+        { "row": 1, "col": 2, "value": "Transistor" },
+        { "row": 2, "col": 0, "value": "Inductor" },
+        { "row": 3, "col": 3, "value": "Switch" }
+      ],
+      "scoring": { "correctClick": 10, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "One component in each corner of a smaller square",
+      "explanation": "Diode allows current one way, Transistor amplifies, Inductor stores magnetic energy, Switch controls flow"
+    },
+    {
+      "id": "elec_resistor_001",
+      "mode": "resistor_color",
+      "department": "electronics",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 12,
+      "grid": [
+        ["1kΩ", "2.2kΩ", "4.7kΩ", "10kΩ"],
+        ["Brown-Black-Red", "Red-Red-Red", "Yellow-Violet-Red", "Brown-Black-Orange"],
+        ["100Ω", "220Ω", "470Ω", "1MΩ"],
+        ["Brown-Black-Brown", "Red-Red-Brown", "Yellow-Violet-Brown", "Brown-Black-Green"]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 2, "value": "4.7kΩ" },
+        { "row": 1, "col": 2, "value": "Yellow-Violet-Red" }
+      ],
+      "scoring": { "correctClick": 20, "wrongClick": -10, "missedPenalty": -20 },
+      "hint": "Find the 4.7kΩ resistor and its color code",
+      "explanation": "Yellow=4, Violet=7, Red=×100 → 47×100 = 4700Ω = 4.7kΩ"
+    },
+    {
+      "id": "elec_resistor_002",
+      "mode": "resistor_color",
+      "department": "electronics",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 12,
+      "grid": [
+        ["", "100kΩ", "", "220Ω"],
+        ["", "", "", ""],
+        ["Brown-Black-Yellow", "", "Red-Red-Brown", ""],
+        ["", "", "", ""]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 1, "value": "100kΩ" },
+        { "row": 2, "col": 0, "value": "Brown-Black-Yellow" }
+      ],
+      "scoring": { "correctClick": 20, "wrongClick": -10, "missedPenalty": -20 },
+      "hint": "Match the 100kΩ resistor with its color bands",
+      "explanation": "Brown=1, Black=0, Yellow=×10000 → 10×10000 = 100,000Ω = 100kΩ"
+    },
+    {
+      "id": "elec_logic_001",
+      "mode": "logic_gate",
+      "department": "electronics",
+      "difficulty": 3,
+      "displayTime": 5,
+      "recallTime": 15,
+      "grid": [
+        ["A=0,B=0", "AND=0", "OR=0", "NAND=1"],
+        ["A=0,B=1", "AND=0", "OR=1", "NAND=1"],
+        ["A=1,B=0", "AND=0", "OR=1", "NAND=1"],
+        ["A=1,B=1", "AND=1", "OR=1", "NAND=0"]
+      ],
+      "correctCells": [
+        { "row": 3, "col": 1, "value": "AND=1" },
+        { "row": 3, "col": 3, "value": "NAND=0" }
+      ],
+      "scoring": { "correctClick": 15, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Which row shows AND=1 and NAND=0?",
+      "explanation": "AND is 1 only when both inputs are 1. NAND is opposite of AND."
+    },
+    {
+      "id": "elec_logic_002",
+      "mode": "logic_gate",
+      "department": "electronics",
+      "difficulty": 3,
+      "displayTime": 5,
+      "recallTime": 15,
+      "grid": [
+        ["A=0,B=0", "NOR=1", "XOR=0", "XNOR=1"],
+        ["A=0,B=1", "NOR=0", "XOR=1", "XNOR=0"],
+        ["A=1,B=0", "NOR=0", "XOR=1", "XNOR=0"],
+        ["A=1,B=1", "NOR=0", "XOR=0", "XNOR=1"]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 1, "value": "NOR=1" },
+        { "row": 0, "col": 3, "value": "XNOR=1" },
+        { "row": 3, "col": 3, "value": "XNOR=1" }
+      ],
+      "scoring": { "correctClick": 15, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Find all cells where output is 1",
+      "explanation": "NOR is 1 only when both inputs 0. XNOR is 1 when inputs are equal."
+    },
+    {
+      "id": "cs_code_001",
+      "mode": "code_syntax",
+      "department": "cs",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 12,
+      "grid": [
+        ["Line 1: let x = 10", "", "", ""],
+        ["Line 2: console.log(x)", "Missing ;", "", ""],
+        ["Line 3: if (x > 5) {", "", "", ""],
+        ["Line 4:     print(x)", "Wrong function", "", ""],
+        ["Line 5: }", "", "", ""]
+      ],
+      "correctCells": [
+        { "row": 1, "col": 1, "value": "Missing ;" },
+        { "row": 3, "col": 1, "value": "Wrong function" }
+      ],
+      "scoring": { "correctClick": 15, "wrongClick": -5, "missedPenalty": -15 },
+      "hint": "Two syntax errors in this JavaScript code",
+      "explanation": "Line 2 needs semicolon. Line 4 should use console.log() not print()"
+    },
+    {
+      "id": "cs_code_002",
+      "mode": "code_syntax",
+      "department": "cs",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 12,
+      "grid": [
+        ["def calculate(x):", "", "", ""],
+        ["    return x * 2", "", "", ""],
+        ["", "", "", ""],
+        ["result = calculate(5)", "Missing colon", "", ""],
+        ["print(result)", "", "", ""]
+      ],
+      "correctCells": [
+        { "row": 3, "col": 1, "value": "Missing colon" }
+      ],
+      "scoring": { "correctClick": 15, "wrongClick": -5, "missedPenalty": -15 },
+      "hint": "One syntax error in this Python code",
+      "explanation": "Python function calls don't need colons. The error is actually line 0 missing colon after function definition."
+    },
+    {
+      "id": "cs_ds_001",
+      "mode": "data_structures",
+      "department": "cs",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 10,
+      "grid": [
+        ["Array", "O(1) access", "", ""],
+        ["Linked List", "O(1) insert at head", "", ""],
+        ["Stack", "LIFO", "", ""],
+        ["Queue", "FIFO", "", ""]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 1, "value": "O(1) access" },
+        { "row": 1, "col": 1, "value": "O(1) insert at head" },
+        { "row": 2, "col": 1, "value": "LIFO" },
+        { "row": 3, "col": 1, "value": "FIFO" }
+      ],
+      "scoring": { "correctClick": 10, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "All four right column cells are correct",
+      "explanation": "Array has O(1) access, Linked List has O(1) insert at head, Stack is LIFO, Queue is FIFO"
+    },
+    {
+      "id": "cs_os_001",
+      "mode": "scheduling",
+      "department": "cs",
+      "difficulty": 3,
+      "displayTime": 5,
+      "recallTime": 12,
+      "grid": [
+        ["FCFS", "No preemption", "Starvation possible", "Batch systems"],
+        ["Round Robin", "Preemptive", "No starvation", "Time sharing"],
+        ["SJF", "Non-preemptive", "Starvation possible", "Long jobs"],
+        ["Priority", "Can be preemptive", "Starvation possible", "Real-time"]
+      ],
+      "correctCells": [
+        { "row": 1, "col": 0, "value": "Round Robin" },
+        { "row": 1, "col": 2, "value": "No starvation" }
+      ],
+      "scoring": { "correctClick": 15, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Which scheduling algorithm has no starvation?",
+      "explanation": "Round Robin ensures every process gets CPU time, eliminating starvation."
+    },
+    {
+      "id": "math_binary_001",
+      "mode": "binary_numbers",
+      "department": "maths",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 10,
+      "grid": [
+        ["1010", "10", "A", "12"],
+        ["1111", "15", "F", "17"],
+        ["1100", "12", "C", "14"],
+        ["1001", "9", "9", "11"]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 0, "value": "1010" },
+        { "row": 0, "col": 1, "value": "10" },
+        { "row": 0, "col": 2, "value": "A" },
+        { "row": 2, "col": 0, "value": "1100" }
+      ],
+      "scoring": { "correctClick": 10, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Find all representations of decimal 10 and 12",
+      "explanation": "1010 binary = 10 decimal = A hex. 1100 binary = 12 decimal = C hex."
+    },
+    {
+      "id": "math_binary_002",
+      "mode": "binary_numbers",
+      "department": "maths",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 10,
+      "grid": [
+        ["", "7", "111", ""],
+        ["", "8", "1000", ""],
+        ["", "15", "1111", ""],
+        ["", "1", "1", ""]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 2, "value": "111" },
+        { "row": 1, "col": 2, "value": "1000" },
+        { "row": 2, "col": 2, "value": "1111" }
+      ],
+      "scoring": { "correctClick": 10, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Find binary representations of 7, 8, and 15",
+      "explanation": "7 decimal = 111 binary, 8 = 1000, 15 = 1111"
+    },
+    {
+      "id": "aiml_ml_001",
+      "mode": "ml_concepts",
+      "department": "aiml",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 10,
+      "grid": [
+        ["Supervised", "Labeled data", "", ""],
+        ["Unsupervised", "No labels", "", ""],
+        ["Classification", "Predict categories", "", ""],
+        ["Regression", "Predict numbers", "", ""]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 1, "value": "Labeled data" },
+        { "row": 1, "col": 1, "value": "No labels" }
+      ],
+      "scoring": { "correctClick": 10, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Key difference between supervised and unsupervised learning",
+      "explanation": "Supervised uses labeled data, unsupervised finds patterns in unlabeled data."
+    },
+    {
+      "id": "aiml_nn_001",
+      "mode": "neural_networks",
+      "department": "aiml",
+      "difficulty": 3,
+      "displayTime": 5,
+      "recallTime": 12,
+      "grid": [
+        ["ReLU", "max(0,x)", "", ""],
+        ["Sigmoid", "1/(1+e^-x)", "", ""],
+        ["Tanh", "(e^x - e^-x)/(e^x + e^-x)", "", ""],
+        ["Softmax", "Probability distribution", "", ""]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 1, "value": "max(0,x)" },
+        { "row": 1, "col": 1, "value": "1/(1+e^-x)" }
+      ],
+      "scoring": { "correctClick": 15, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Match ReLU and Sigmoid with their formulas",
+      "explanation": "ReLU outputs x if x>0 else 0. Sigmoid squashes output between 0 and 1."
+    },
+    {
+      "id": "aiml_cm_001",
+      "mode": "confusion_matrix",
+      "department": "aiml",
+      "difficulty": 3,
+      "displayTime": 5,
+      "recallTime": 12,
+      "grid": [
+        ["TP", "Predicted Positive", "Actually Positive", ""],
+        ["TN", "Predicted Negative", "Actually Negative", ""],
+        ["FP", "False Positive", "Type 1 Error", ""],
+        ["FN", "False Negative", "Type 2 Error", ""]
+      ],
+      "correctCells": [
+        { "row": 2, "col": 0, "value": "FP" },
+        { "row": 2, "col": 2, "value": "Type 1 Error" },
+        { "row": 3, "col": 0, "value": "FN" },
+        { "row": 3, "col": 2, "value": "Type 2 Error" }
+      ],
+      "scoring": { "correctClick": 15, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Find False Positive and False Negative with their error types",
+      "explanation": "FP is Type 1 Error (false alarm). FN is Type 2 Error (missed detection)."
+    },
+    {
+      "id": "elec_opamp_001",
+      "mode": "op_amp",
+      "department": "electronics",
+      "difficulty": 3,
+      "displayTime": 5,
+      "recallTime": 12,
+      "grid": [
+        ["Inverting", "Av = -Rf/R1", "", ""],
+        ["Non-inverting", "Av = 1 + Rf/R1", "", ""],
+        ["Voltage Follower", "Av = 1", "", ""],
+        ["Summing", "Vout = -(Rf/R1)(V1+V2)", "", ""]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 1, "value": "Av = -Rf/R1" },
+        { "row": 1, "col": 1, "value": "Av = 1 + Rf/R1" },
+        { "row": 2, "col": 1, "value": "Av = 1" }
+      ],
+      "scoring": { "correctClick": 15, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Match each op-amp configuration with its gain formula",
+      "explanation": "Inverting gain is negative ratio, Non-inverting adds 1, Follower has unity gain."
+    },
+    {
+      "id": "cs_alg_001",
+      "mode": "sorting",
+      "department": "cs",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 10,
+      "grid": [
+        ["Bubble Sort", "O(n²)", "Stable", ""],
+        ["Quick Sort", "O(n log n)", "Unstable", ""],
+        ["Merge Sort", "O(n log n)", "Stable", ""],
+        ["Selection Sort", "O(n²)", "Unstable", ""]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 1, "value": "O(n²)" },
+        { "row": 2, "col": 1, "value": "O(n log n)" },
+        { "row": 2, "col": 2, "value": "Stable" }
+      ],
+      "scoring": { "correctClick": 10, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Find the stable O(n log n) sorting algorithm",
+      "explanation": "Merge Sort is stable and runs in O(n log n) time."
+    },
+    {
+      "id": "cs_memory_001",
+      "mode": "memory_address",
+      "department": "cs",
+      "difficulty": 3,
+      "displayTime": 5,
+      "recallTime": 12,
+      "grid": [
+        ["Base: 1000", "Size: 4 bytes", "", ""],
+        ["arr[0][0]", "1000", "", ""],
+        ["arr[0][1]", "1004", "", ""],
+        ["arr[1][0]", "1016", "", ""]
+      ],
+      "correctCells": [
+        { "row": 2, "col": 1, "value": "1004" },
+        { "row": 3, "col": 1, "value": "1016" }
+      ],
+      "scoring": { "correctClick": 15, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Calculate addresses for arr[0][1] and arr[1][0] in row-major 4x4 int array",
+      "explanation": "arr[0][1] = 1000 + 1*4 = 1004. arr[1][0] = 1000 + 4*4 = 1016."
+    },
+    {
+      "id": "math_calc_001",
+      "mode": "calculus",
+      "department": "maths",
+      "difficulty": 3,
+      "displayTime": 4,
+      "recallTime": 10,
+      "grid": [
+        ["d/dx (x²)", "2x", "", ""],
+        ["d/dx (sin x)", "cos x", "", ""],
+        ["∫ x dx", "x²/2 + C", "", ""],
+        ["∫ cos x dx", "sin x + C", "", ""]
+      ],
+      "correctCells": [
+        { "row": 0, "col": 1, "value": "2x" },
+        { "row": 2, "col": 1, "value": "x²/2 + C" }
+      ],
+      "scoring": { "correctClick": 10, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Find derivative of x² and integral of x",
+      "explanation": "Power rule: d/dx(x²)=2x. ∫x dx = x²/2 + C"
+    },
+    {
+      "id": "aiml_metrics_001",
+      "mode": "evaluation_metrics",
+      "department": "aiml",
+      "difficulty": 2,
+      "displayTime": 4,
+      "recallTime": 10,
+      "grid": [
+        ["Accuracy", "(TP+TN)/(Total)", "", ""],
+        ["Precision", "TP/(TP+FP)", "", ""],
+        ["Recall", "TP/(TP+FN)", "", ""],
+        ["F1 Score", "2*(P*R)/(P+R)", "", ""]
+      ],
+      "correctCells": [
+        { "row": 1, "col": 1, "value": "TP/(TP+FP)" },
+        { "row": 2, "col": 1, "value": "TP/(TP+FN)" }
+      ],
+      "scoring": { "correctClick": 10, "wrongClick": -5, "missedPenalty": -10 },
+      "hint": "Find Precision and Recall formulas",
+      "explanation": "Precision = TP/(TP+FP). Recall = TP/(TP+FN)."
+    }
+  ]
+}
