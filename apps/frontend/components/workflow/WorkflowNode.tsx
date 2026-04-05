@@ -8,46 +8,39 @@ export type WorkflowNodeData = {
   axis: "x" | "y";
 };
 
-function WorkflowNodeInner({ data }: NodeProps) {
+function WorkflowNodeInner({ data, selected }: NodeProps) {
   const d = data as WorkflowNodeData;
-  const horizontal = d.axis === "x";
+  const vertical = d.axis === "y";
+
+  const handleCls =
+    "!h-4 !w-4 !rounded-full !border-2 !border-neon/70 !bg-[#010828] hover:!border-neon hover:!bg-neon/20 transition-all duration-100 cursor-crosshair";
 
   return (
     <div
-      className="min-w-[112px] rounded-xl border border-neon/45 bg-[#0a1228] px-3 py-2.5 text-center shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-transform hover:scale-[1.02]"
-      style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)" }}
+      className="relative min-w-[120px] rounded-xl border bg-[#0a1228] px-4 py-3 text-center shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-150"
+      style={{
+        borderColor: selected ? "#6fff00" : "rgba(111,255,0,0.38)",
+        boxShadow: selected
+          ? "0 0 0 2px rgba(111,255,0,0.22)"
+          : undefined,
+      }}
     >
-      {horizontal ? (
+      {/* Handles — use className only, NOT style prop, so React Flow can position them */}
+      {vertical ? (
         <>
-          <Handle
-            type="target"
-            position={Position.Left}
-            className="!h-2.5 !w-2.5 !border-neon/60 !bg-[#010828]"
-          />
-          <p className="font-mono text-[11px] font-medium leading-snug text-cream">
+          <Handle type="target" position={Position.Top} className={handleCls} />
+          <p className="pointer-events-none font-mono text-[12px] font-semibold leading-snug text-cream">
             {d.label}
           </p>
-          <Handle
-            type="source"
-            position={Position.Right}
-            className="!h-2.5 !w-2.5 !border-neon/60 !bg-[#010828]"
-          />
+          <Handle type="source" position={Position.Bottom} className={handleCls} />
         </>
       ) : (
         <>
-          <Handle
-            type="target"
-            position={Position.Top}
-            className="!h-2.5 !w-2.5 !border-neon/60 !bg-[#010828]"
-          />
-          <p className="font-mono text-[11px] font-medium leading-snug text-cream">
+          <Handle type="target" position={Position.Left} className={handleCls} />
+          <p className="pointer-events-none font-mono text-[12px] font-semibold leading-snug text-cream">
             {d.label}
           </p>
-          <Handle
-            type="source"
-            position={Position.Bottom}
-            className="!h-2.5 !w-2.5 !border-neon/60 !bg-[#010828]"
-          />
+          <Handle type="source" position={Position.Right} className={handleCls} />
         </>
       )}
     </div>

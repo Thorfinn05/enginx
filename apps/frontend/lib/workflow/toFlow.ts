@@ -18,7 +18,8 @@ export function edgesToFlow(edges: WorkflowEdgeJson[]): Edge[] {
     id: e.id,
     source: e.source,
     target: e.target,
-    animated: true,
-    style: { stroke: "rgba(111, 255, 0, 0.55)", strokeWidth: 2 },
+    type: "default",
+    animated: false,
+    style: { stroke: "rgba(160,160,180,0.65)", strokeWidth: 2 },
   }));
 }
